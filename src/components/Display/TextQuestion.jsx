@@ -2,7 +2,7 @@ import { useState } from "react";
 import Button from "./Button/Button";
 import styles from "./TextQuestion.module.css";
 
-export default function TextQuestion({ question, onSubmit }) {
+export default function TextQuestion({ onSubmit }) {
   const [textAnswer, setTextAnswer] = useState("");
 
   const handleSubmit = () => {
@@ -12,7 +12,6 @@ export default function TextQuestion({ question, onSubmit }) {
 
   return (
     <div>
-      <p>{question.question}</p>
       <input
         type="text"
         className={styles.textInput}
