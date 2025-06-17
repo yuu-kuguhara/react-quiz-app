@@ -1,11 +1,11 @@
 import { useState } from "react";
 import Button from "./Button/Button";
 
-export default function TextQuestion() {
+export default function TextQuestion({ question, onSubmit}) {
   const [textAnswer, setTextAnswer] = useState("");
 
   const handleSubmit = () => {
-    onsubmit(textAnswer); /* QuizPage側に回答を渡す */
+    onSubmit(textAnswer); /* QuizPage側に回答を渡す */
     setTextAnswer(""); /* フォームをクリア */
   };
 

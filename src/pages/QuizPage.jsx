@@ -4,6 +4,7 @@ import quizData from "../data/quiz";
 import { useNavigate } from "react-router-dom";
 import { ROUTES } from "../const";
 import { useEffect, useState } from "react";
+import TextQuestion from "../components/Display/TextQuestion";
 
 export default function QuizPage() {
   const [quizIndex, setQuizIndex] = useState(0);
@@ -11,7 +12,9 @@ export default function QuizPage() {
   const navigation = useNavigate();
   const MAX_QUIZ_LEN = quizData.length;
 
+  // 4択問題のクリック処理
   const handleClick = (clickedIndex) => {
+    // ユーザーの回答が正解かどうかをチェック
     if (clickedIndex === quizData[quizIndex].answerIndex) {
       // 配列にtrueを追加
       setAnswerLogs((prev) => [...prev, true]); /* ...→スプレッド構文 */
@@ -23,6 +26,21 @@ export default function QuizPage() {
     setQuizIndex((prev) => prev + 1); /* prev→previous(前の) */
   };
 
+  // 記述式問題の解答送信処理
+  const handleTextSubmit = (input) => {
+    const correctAnswers = quizData[quizIndex].answerText.map((ans) =>
+      ans.trim().toLowerCase()
+    );
+    const userAnswer = input.trim().toLowerCase();
+
+    if (correctAnswers.includes(userAnswer)) {
+      setAnswerLogs((prev) => [...prev, true]);
+    } else {
+      setAnswerLogs((prev) => [...prev, false]);
+    }
+    setQuizIndex((prev) => prev + 1);
+  };
+
   // 問題の総数と正解数を表示
   useEffect(() => {
     if (answerLogs.length === MAX_QUIZ_LEN) {
@@ -31,7 +49,7 @@ export default function QuizPage() {
       navigation(ROUTES.RESULT, {
         state: {
           maxQuizLen: MAX_QUIZ_LEN,
-          correctNumLen: correctNum.length
+          correctNumLen: correctNum.length,
         },
       });
     }
@@ -40,14 +58,23 @@ export default function QuizPage() {
   return (
     <>
       {quizData[quizIndex] && (
-        <Display>{`Q${quizIndex + 1}. ${quizData[quizIndex].question}`}</Display>
+        <Display>{`Q${quizIndex + 1}. ${
+          quizData[quizIndex].question
+        }`}</Display>
       )}
       <br />
       {quizData[quizIndex] &&
-        quizData[quizIndex].options.map((option, index) => (
-          <Button key={`option-${index}`} onClick={() => handleClick(index)}>
-            {option}
-          </Button>
+        (quizData[quizIndex].options ? (
+          quizData[quizIndex].options.map((option, index) => (
+            <Button key={`option-${index}`} onClick={() => handleClick(index)}>
+              {option}
+            </Button>
+          ))
+        ) : (
+          <TextQuestion
+            onSubmit={handleTextSubmit}
+            question={quizData[quizIndex]}
+          />
         ))}
     </>
   );
