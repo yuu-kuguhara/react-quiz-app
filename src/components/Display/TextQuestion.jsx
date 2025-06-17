@@ -1,7 +1,8 @@
 import { useState } from "react";
 import Button from "./Button/Button";
+import styles from "./TextQuestion.module.css";
 
-export default function TextQuestion({ question, onSubmit}) {
+export default function TextQuestion({ question, onSubmit }) {
   const [textAnswer, setTextAnswer] = useState("");
 
   const handleSubmit = () => {
@@ -14,6 +15,7 @@ export default function TextQuestion({ question, onSubmit}) {
       <p>{question.question}</p>
       <input
         type="text"
+        className={styles.textInput}
         value={textAnswer}
         onChange={(e) => setTextAnswer(e.target.value)}
         placeholder="回答を入力してください"
