@@ -4,7 +4,7 @@ import quizData from "../data/quiz";
 import { useNavigate } from "react-router-dom";
 import { ROUTES } from "../const";
 import { useEffect, useState } from "react";
-import TextQuestion from "../components/Display/TextQuestion";
+import TextQuestion from "../components/TextQuestion/TextQuestion";
 
 export default function QuizPage() {
   const [quizIndex, setQuizIndex] = useState(0);

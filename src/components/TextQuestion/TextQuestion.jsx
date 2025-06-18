@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Button from "./Button/Button";
+import Button from "../Display/Button/Button";
 import styles from "./TextQuestion.module.css";
 
 export default function TextQuestion({ onSubmit }) {
