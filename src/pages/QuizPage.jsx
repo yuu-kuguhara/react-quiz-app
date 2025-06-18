@@ -1,4 +1,4 @@
-import Button from "../components/Display/Button/Button";
+import Button from "../components/Button/Button";
 import Display from "../components/Display/Display";
 import quizData from "../data/quiz";
 import { useNavigate } from "react-router-dom";
