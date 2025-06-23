@@ -7,7 +7,8 @@ import { useEffect, useState } from "react";
 import TextQuestion from "../components/TextQuestion/TextQuestion";
 
 export default function QuizPage() {
-  const [quizIndex, setQuizIndex] = useState(0);
+  const [quizIndex, setQuizIndex] =
+    useState(0); /* quizIndex=問題(0番目なら1問目) */
   const [answerLogs, setAnswerLogs] = useState([]);
   const navigation = useNavigate();
   const MAX_QUIZ_LEN = quizData.length;
@@ -29,14 +30,18 @@ export default function QuizPage() {
   // 記述式問題の解答送信処理
   const handleTextSubmit = (input) => {
     const correctAnswers = quizData[quizIndex].answerText.map((ans) =>
-      ans.trim().toLowerCase()
+      ans.trim()
     );
-    const userAnswer = input.trim().toLowerCase();
+    const userAnswer = input.trim();
 
     if (correctAnswers.includes(userAnswer)) {
+      /* includes(...)→ userAnswerがcorrectAnswers配列の中に含まれているかを判定*/
       setAnswerLogs((prev) => [...prev, true]);
     } else {
-      setAnswerLogs((prev) => [...prev, false]);
+      setAnswerLogs((prev) => [
+        ...prev,
+        false,
+      ]); /* answerLogs = [true, false, true, ..., true] のように履歴がたまる */
     }
     setQuizIndex((prev) => prev + 1);
   };
@@ -57,14 +62,14 @@ export default function QuizPage() {
 
   return (
     <>
-      {quizData[quizIndex] && (
+      {quizData[quizIndex] /* &&→条件がtrueの時だけ描画する */ && (
         <Display>{`Q${quizIndex + 1}. ${
           quizData[quizIndex].question
         }`}</Display>
       )}
       <br />
       {quizData[quizIndex] &&
-        (quizData[quizIndex].options ? (
+        (quizData[quizIndex].options /* 条件 ? 真のときの値 : 偽の時の値 */ ? (
           quizData[quizIndex].options.map((option, index) => (
             <Button key={`option-${index}`} onClick={() => handleClick(index)}>
               {option}

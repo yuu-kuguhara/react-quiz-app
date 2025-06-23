@@ -1,0 +1,96 @@
+〇略称
+・短い関数、処理内→ans, idxなど略してOK
+・長く複雑な関数→answer, indexと正式名称の方が読みやすい
+
+〇命名規則
+・コンポーネントは大文字で始める
+→Button, ButtonComponent(アッパーキャメルケース)
+
+〇三項演算子
+・条件 ? 真のときの値 : 偽の時の値
+→10 > 5 ? "大きい" : "小さい" //→"大きい"
+
+〇eslint.config.js
+],
+・初期設定
+"no-undef": "error",
+"no-unused-vars": "error",
+"react/prop-types": "off",
+},
+カッコ内の3行を追加
+
+〇空のフラグメント(<>, </>)
+・複数のタグを書きたい場合、空のフラグメントで囲う必要がある
+※下記のように記述
+<>
+    <h1>Hello World</h1>
+    <Button />
+</>
+
+〇props
+→親コンポーネントから子コンポーネントへ値を渡す仕組み
+children→コンポーネントの中身に書いた要素やテキストを受け取るためのもの
+・様々な値を親コンポーネントから子コンポーネントに受け渡す
+
+〇Hooks
+・useState→状態を管理するためのフック
+import { useState } from "react"
+const [count, setCount] = useState(0);
+const handleClick = () => {
+    setCount(count + 1);
+}
+※set~は変数を更新する
+
+・useEffect→副作用(サイドエフェクト)を扱うためのフック
+→プログラムが本来の目的以外のことをする場合に使いたい処理
+→引数を２つ持つ(第1引数にコールバック関数、第2引数に配列を指定)
+import { useState, useEffect } from "react"
+useEffect(() => {
+    console.log('count:', count);
+    if(count > 15) {
+        setCount(0)
+    }
+}, [count])
+
+〇ルーティング(reactRouterというライブラリが必要)
+→アプリの中でページを切り替える仕組み
+→コマンド：npm i react-router-dom
+step1.ページを作る(Home.jsx, SamplePage.jsx)
+
+step2.App.jsxでルーティングを設定
+import Home from '/pages/Home'
+import SamplePage from '/pages/SamplePage'
+function App() {
+    return(
+        <BrowserRouter>
+        <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='/sample-page' element={<SamplePage />} />
+        </Routes>
+        </BrowserRouter>
+    )
+}
+
+step3.Linkコンポーネントでページを切り替える
+import { Link } from "react-router-dom"
+<Link to='/SamplePage'>Homeへ遷移</Link>
+
+〇.map()
+→配列要素に対して使える、jsに標準搭載されているメソッドでループ文の一種みたいなもの
+→引数を2つ受け取る
+→Button要素にkey属性を与えてユニークな値を持たせる
+
+〇.filter()
+→配列に対して使えるメソッド
+→条件に合うものだけを取り出し、新しい配列を作る
+
+〇&&
+→条件文でAND条件を設定したいときに使う論理演算子
+
+
+
+
+
+
+
+
