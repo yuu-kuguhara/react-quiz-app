@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { ROUTES } from "../const";
 import { useEffect, useState } from "react";
 import TextQuestion from "../components/TextQuestion/TextQuestion";
+import { getLevelLabel } from "../data/quizLevel";
 
 export default function QuizPage() {
   const [quizIndex, setQuizIndex] =
@@ -12,6 +13,7 @@ export default function QuizPage() {
   const [answerLogs, setAnswerLogs] = useState([]);
   const navigation = useNavigate();
   const MAX_QUIZ_LEN = quizData.length;
+  const level = getLevelLabel(quizIndex);
 
   // 4択問題のクリック処理
   const handleClick = (clickedIndex) => {
@@ -62,6 +64,7 @@ export default function QuizPage() {
 
   return (
     <>
+      <h2>レベル: {level}</h2>
       {quizData[quizIndex] /* &&→条件がtrueの時だけ描画する */ && (
         <Display>{`Q${quizIndex + 1}. ${
           quizData[quizIndex].question

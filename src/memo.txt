@@ -87,6 +87,38 @@ import { Link } from "react-router-dom"
 〇&&
 →条件文でAND条件を設定したいときに使う論理演算子
 
+〇ソースコードの省略
+・引数のカッコ()は、引数が1つだけの時は省略可能
+setAnswerLogs((prev) => [...prev, true]); //省略前
+setAnswerLogs(prev => [...prev, true]); //省略後
+
+・関数の処理が1行だけで値をreturnで返すだけなら省略可能
+const correctNum = answerLogs.filter(answer => {
+    return answer === true
+})
+↓
+const correctNum = answerLogs.filter(answer => answer === true)
+
+〇useLocation
+↓データの受け取りを行う
+import { useLocation } from "react-router-dom"
+export ~~~(){
+    const location = useLocation();
+    const maxQuizLen = location.state.maxQuizLen ★
+    return (
+        ~~~~
+    )
+}
+
+〇ease-in-out
+→イージングと呼ばれるアニメーションの動きの一種
+ 緩急をつけて動かすエフェクトパターン
+ transition: transform 0.5s;
+ &.isActive {
+    transform: translateY(-100%)
+ }
+
+
 
 
 
