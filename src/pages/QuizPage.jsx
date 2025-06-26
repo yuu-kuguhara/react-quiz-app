@@ -11,6 +11,9 @@ export default function QuizPage() {
   const [quizIndex, setQuizIndex] =
     useState(0); /* quizIndex=問題(0番目なら1問目) */
   const [answerLogs, setAnswerLogs] = useState([]);
+  const [currentLevel, setCurrentLevel] = useState(
+    getLevelLabel(quizIndex)
+  ); /* useState(...) の初期値として現在のレベルを取得 */
   const navigation = useNavigate();
   const MAX_QUIZ_LEN = quizData.length;
   const level = getLevelLabel(quizIndex);
@@ -47,6 +50,15 @@ export default function QuizPage() {
     }
     setQuizIndex((prev) => prev + 1);
   };
+
+  // レベル変更時の通知ロジック
+  useEffect(() => {
+    const newLevel = getLevelLabel(quizIndex);
+    if (newLevel !== currentLevel) {
+      alert(`レベルが「${newLevel}」に上がりました！`);
+      setCurrentLevel(newLevel);
+    }
+  }, [quizIndex]);
 
   // 問題の総数と正解数を表示
   useEffect(() => {
