@@ -53,6 +53,9 @@ export default function QuizPage() {
 
   // レベル変更時の通知ロジック
   useEffect(() => {
+    if (quizIndex >= MAX_QUIZ_LEN) {
+      return; // すべての問題が終了した場合は何もしない
+    }
     const newLevel = getLevelLabel(quizIndex);
     if (newLevel !== currentLevel) {
       alert(`レベルが「${newLevel}」に上がりました！`);
