@@ -118,6 +118,20 @@ export ~~~(){
     transform: translateY(-100%)
  }
 
+〇変数の重複
+const handleClick = (clickedIndex) => {
+  // この関数内だけの isAnswerCorrect
+  const isAnswerCorrect = clickedIndex === correctIndex;
+};
+
+const handleTextSubmit = (input) => {
+  // 別の関数内だけの isAnswerCorrect
+  const isAnswerCorrect = correctAnswers.includes(userAnswer);
+};
+・二つの関数はそれぞれ独立している
+→同じ定数名でも衝突しない
+・関数内のconstはその関数を出ると無効になる
+
 
 
 
