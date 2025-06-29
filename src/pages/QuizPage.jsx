@@ -74,7 +74,7 @@ export default function QuizPage() {
       alert(`レベルが「${newLevel}」に上がりました！`);
       setCurrentLevel(newLevel);
     }
-  }, [quizIndex]);
+  }, [quizIndex, currentLevel, MAX_QUIZ_LEN]);
 
   // 問題の総数と正解数を表示
   useEffect(() => {
@@ -127,8 +127,11 @@ export default function QuizPage() {
             quizData[quizIndex].answerText ||
             quizData[quizIndex].options[quizData[quizIndex].answerIndex]
           }
-          onNext={goNext}
         />
+      )}
+      {/* 10問目の時のみボタンを非表示 */}
+      {quizIndex < MAX_QUIZ_LEN - 1 && showResult && (
+        <Button onClick={goNext}>次の問題へ</Button>
       )}
     </>
   );

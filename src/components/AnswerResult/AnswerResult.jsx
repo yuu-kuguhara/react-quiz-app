@@ -1,7 +1,6 @@
-import Button from "../Button/Button";
 import styles from "./AnswerResult.module.css";
 
-export default function AnswerResult({ isCorrect, correctAnswer, onNext }) {
+export default function AnswerResult({ isCorrect, correctAnswer }) {
   return (
     <div className={styles.resultContainer}>
       {isCorrect ? (
@@ -20,8 +19,6 @@ export default function AnswerResult({ isCorrect, correctAnswer, onNext }) {
           )}
         </div>
       )}
-
-      <Button onClick={onNext}>次の問題へ</Button>
     </div>
   );
 }
